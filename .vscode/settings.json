@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "iterator": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp",
+        "format": "cpp",
+        "iosfwd": "cpp",
+        "system_error": "cpp",
+        "xlocale": "cpp"
+    }
+}
