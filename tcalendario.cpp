@@ -24,6 +24,19 @@ TCalendario::daysInMonth(int m, int a) {
     return days;
 }
 
+void TCalendario::copia(const TCalendario &c) {
+    dia = c.dia;
+    mes = c.mes;
+    anyo = c.anyo;
+    delete[] mensaje; // Liberar la memoria antigua
+    if (c.mensaje != NULL) {
+        mensaje = new char[strlen(c.mensaje) + 1];
+        strcpy(mensaje, c.mensaje);
+    } else {
+        mensaje = NULL;
+    }
+}
+
 TCalendario::TCalendario() {
     dia = 1;
     mes = 1;
@@ -48,15 +61,7 @@ TCalendario::TCalendario(int d, int m, int a, char * mens) {
 }
 
 TCalendario::TCalendario(const TCalendario &c) {
-    dia = c.dia;
-    mes = c.mes;
-    anyo = c.anyo;
-    if (c.mensaje != NULL) {
-        mensaje = new char[strlen(c.mensaje) + 1];
-        strcpy(mensaje, c.mensaje);
-    } else {
-        mensaje = NULL;
-    }
+    copia(c);
 }
 
 TCalendario::~TCalendario() {
@@ -71,16 +76,31 @@ TCalendario::~TCalendario() {
 
 TCalendario & TCalendario::operator=(const TCalendario &c) {
     if (this != &c) { // Protección contra autoasignación
-        dia = c.dia;
-        mes = c.mes;
-        anyo = c.anyo;
-        delete[] mensaje; // Liberar la memoria antigua
-        if (c.mensaje != NULL) {
-            mensaje = new char[strlen(c.mensaje) + 1];
-            strcpy(mensaje, c.mensaje);
-        } else {
-            mensaje = NULL;
-        }
+        (*this).~TCalendario();
+        copia(c);
     }
     return *this; // Devolver una referencia a este objeto
 }
+
+TCalendario TCalendario::operator+(int n) {
+    if (n < 0) {
+        return *this;
+    }
+    TCalendario c(*this);
+    for (int i = 0; i < n; i++) {
+        c.dia++;
+        if (c.dia > daysInMonth(c.mes, c.anyo)) {
+            c.dia = 1;
+            c.mes++;
+            if (c.mes > 12) {
+                c.mes = 1;
+                c.anyo++;
+            }
+        }
+    }
+    
+    return c;
+}
+
+
+

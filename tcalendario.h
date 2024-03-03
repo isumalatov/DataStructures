@@ -12,6 +12,7 @@ class TCalendario {
         int dia, mes, anyo;
         char* mensaje;
         int daysInMonth(int, int);
+        void copia(const TCalendario &c);
 
     public:
         TCalendario();
