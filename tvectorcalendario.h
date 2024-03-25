@@ -10,11 +10,11 @@ class TVectorCalendario {
     friend ostream & operator<<(ostream &, TVectorCalendario &);
     
     private:
-        #include "tcalendario.h"
-
         TCalendario *c;
         int tamano;
         TCalendario error;
+        int daysInMonth(int, int);
+        void copia(const TVectorCalendario &);
 
     public:
         TVectorCalendario();

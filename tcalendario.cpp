@@ -1,4 +1,5 @@
 #include "tcalendario.h"
+#include <string.h>
 
 int
 TCalendario::daysInMonth(int m, int a) {
