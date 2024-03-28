@@ -2,11 +2,12 @@
 #define TCALENDARIO_H
 
 #include <iostream>
+#include <string.h>
 
 using namespace std;
 
 class TCalendario {
-    friend ostream & operator<<(ostream &, TCalendario &);
+    friend ostream & operator<<(ostream &, const TCalendario &);
     
     private:
         int dia, mes, anyo;
@@ -28,15 +29,15 @@ class TCalendario {
         TCalendario & operator--();
         bool ModFecha(int, int, int); 
         bool ModMensaje(char *);
-        bool operator==(TCalendario &);
-        bool operator!=(TCalendario &);
-        bool operator>(TCalendario &); 
-        bool operator<(TCalendario &);
+        bool operator==(const TCalendario &);
+        bool operator!=(const TCalendario &);
+        bool operator>(const TCalendario &); 
+        bool operator<(const TCalendario &);
         bool EsVacio();
-        int Dia();
-        int Mes();
-        int Anyo();
-        char * Mensaje();
+        int Dia() const;
+        int Mes() const;
+        int Anyo() const;
+        char * Mensaje() const;
 };
 
 #endif

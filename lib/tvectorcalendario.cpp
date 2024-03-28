@@ -1,7 +1,7 @@
 #include "tvectorcalendario.h"
 
 int
-TCalendario::daysInMonth(int m, int a) {
+TVectorCalendario::daysInMonth(int m, int a) {
     int days;
     switch (m) {
         case 2:
@@ -71,7 +71,7 @@ bool TVectorCalendario::operator==(const TVectorCalendario &v) {
         return false;
     }
     for (int i = 0; i < tamano; i++) {
-        if (!(c[i] == v.c[i])) { // use TCalendario::operator== here
+        if (!(c[i] == v.c[i])) {
             return false;
         }
     }
@@ -83,7 +83,14 @@ bool TVectorCalendario::operator!=(const TVectorCalendario &v) {
 }
 
 TCalendario & TVectorCalendario::operator[](int i) {
-    if (i < 1 || i > tamano) {
+    if (i > 0 && i <= tamano) {
+        return error;
+    }
+    return c[i - 1];
+}
+
+TCalendario TVectorCalendario::operator[](int i) const {
+    if (i > 0 && i <= tamano) {
         return error;
     }
     return c[i - 1];
@@ -103,9 +110,9 @@ int TVectorCalendario::Ocupadas() {
     return ocupadas;
 }
 
-bool TVectorCalendario::ExisteCal(TCalendario &cal) {
+bool TVectorCalendario::ExisteCal(const TCalendario &cal) {
     for (int i = 0; i < tamano; i++) {
-        if (c[i] == cal) { // use TCalendario::operator== here
+        if (c[i] == cal) {
             return true;
         }
     }
@@ -149,14 +156,14 @@ bool TVectorCalendario::Redimensionar(int t) {
             aux[i] = c[i];
         }
         for (int i = tamano; i < t; i++) {
-            aux[i] = TCalendario(); // Crear objeto TCalendario vacío
+            aux[i] = TCalendario();
         }
         delete[] c;
         c = aux;
         tamano = t;
         return true;
     }
-
+    return false;
 }
 
 

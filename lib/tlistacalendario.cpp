@@ -47,17 +47,18 @@ TListaPos & TListaPos::operator=(const TListaPos &l) {
         this->~TListaPos();
         copia(l);
     }
+    return *this;
 }
 
-bool TListaPos::operator==(const TListaPos &l) {
+bool TListaPos::operator==(const TListaPos &l) const{
     return pos == l.pos;
 }
 
-bool TListaPos::operator!=(const TListaPos &l) {
+bool TListaPos::operator!=(const TListaPos &l) const{
     return pos != l.pos;
 }
 
-TListaPos TListaPos::Siguiente() {
+TListaPos TListaPos::Siguiente() const{
     TListaPos l;
     if (pos != NULL) {
         l.pos = pos->siguiente;
@@ -65,7 +66,7 @@ TListaPos TListaPos::Siguiente() {
     return l;
 }
 
-bool TListaPos::EsVacia() {
+bool TListaPos::EsVacia() const{
     return pos == NULL;
 }
 
@@ -111,7 +112,7 @@ TListaCalendario & TListaCalendario::operator=(const TListaCalendario &l) {
     return *this;
 }
 
-bool TListaCalendario::operator==(const TListaCalendario &l) {
+bool TListaCalendario::operator==(TListaCalendario &l) {
     TNodoCalendario *n = primero;
     TNodoCalendario *m = l.primero;
     while (n != NULL && m != NULL) {
@@ -124,7 +125,7 @@ bool TListaCalendario::operator==(const TListaCalendario &l) {
     return n == NULL && m == NULL;
 }
 
-TListaCalendario TListaCalendario::operator+(const TListaCalendario &l) {
+TListaCalendario TListaCalendario::operator+(TListaCalendario &l) {
     TListaCalendario aux(*this);
     TNodoCalendario *n = l.primero;
     while (n != NULL) {
@@ -134,7 +135,7 @@ TListaCalendario TListaCalendario::operator+(const TListaCalendario &l) {
     return aux;
 }
 
-TListaCalendario TListaCalendario::operator-(const TListaCalendario &l) {
+TListaCalendario TListaCalendario::operator-(TListaCalendario &l) {
     TListaCalendario aux(*this);
     TNodoCalendario *n = l.primero;
     while (n != NULL) {
@@ -178,7 +179,7 @@ bool TListaCalendario::Borrar(TCalendario &c) {
     return false;
 }
 
-bool TListaCalendario::Borrar(TListaPos &p) {
+bool TListaCalendario::Borrar(const TListaPos &p) {
     TNodoCalendario *n = p.pos;
     TNodoCalendario *m = primero;
     TNodoCalendario *q = NULL;
@@ -203,15 +204,15 @@ bool TListaCalendario::Borrar(int d, int m, int a) {
     return Borrar(c);
 }
 
-bool TListaCalendario::EsVacia() {
+bool TListaCalendario::EsVacia() const{
     return primero == NULL;
 }
 
-TCalendario TListaCalendario::Obtener(const TListaPos &p) {
+TCalendario TListaCalendario::Obtener(const TListaPos &p) const{
     return p.pos->c;
 }
 
-bool TListaCalendario::Buscar(TCalendario &c) {
+bool TListaCalendario::Buscar(TCalendario &c) const{
     TNodoCalendario *n = primero;
     while (n != NULL && n->c != c) {
         n = n->siguiente;
@@ -219,7 +220,7 @@ bool TListaCalendario::Buscar(TCalendario &c) {
     return n != NULL;
 }
 
-int TListaCalendario::Longitud() {
+int TListaCalendario::Longitud() const{
     int l = 0;
     TNodoCalendario *n = primero;
     while (n != NULL) {
@@ -229,13 +230,13 @@ int TListaCalendario::Longitud() {
     return l;
 }
 
-TListaPos TListaCalendario::Primera() {
+TListaPos TListaCalendario::Primera() const{
     TListaPos p;
     p.pos = primero;
     return p;
 }
 
-TListaPos TListaCalendario::Ultima() {
+TListaPos TListaCalendario::Ultima() const{
     TListaPos p;
     TNodoCalendario *n = primero;
     while (n != NULL && n->siguiente != NULL) {

@@ -2,6 +2,7 @@
 #define TVECTORCALENDARIO_H
 
 #include <iostream>
+#include <string.h>
 #include "tcalendario.h"
 
 using namespace std;
@@ -25,9 +26,10 @@ class TVectorCalendario {
         bool operator==(const TVectorCalendario &);
         bool operator!=(const TVectorCalendario &);
         TCalendario & operator[](int);
+        TCalendario operator[](int) const;
         int Tamano();
         int Ocupadas();
-        bool ExisteCal(TCalendario &);
+        bool ExisteCal(const TCalendario &);
         void MostrarMensajes(int, int, int);
         bool Redimensionar(int);
 };
