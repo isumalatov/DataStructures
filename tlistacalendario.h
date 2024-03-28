@@ -23,12 +23,12 @@ class TListaCalendario {
         TListaCalendario operator+(const TListaCalendario &);
         TListaCalendario operator-(const TListaCalendario &);
         bool Insertar(const TCalendario &);
-        bool Borrar(const TCalendario &);
-        bool Borrar(const TListaPos &);
+        bool Borrar(TCalendario &);
+        bool Borrar(TListaPos &);
         bool Borrar(int, int, int);
         bool EsVacia();
         TCalendario Obtener(const TListaPos &);
-        bool Buscar(const TCalendario &);
+        bool Buscar(TCalendario &);
         int Longitud();
         TListaPos Primera();
         TListaPos Ultima();

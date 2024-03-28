@@ -159,7 +159,7 @@ bool TListaCalendario::Insertar(const TCalendario &c) {
     return true;
 }
 
-bool TListaCalendario::Borrar(const TCalendario &c) {
+bool TListaCalendario::Borrar(TCalendario &c) {
     TNodoCalendario *n = primero;
     TNodoCalendario *p = NULL;
     while (n != NULL && n->c != c) {
@@ -178,7 +178,7 @@ bool TListaCalendario::Borrar(const TCalendario &c) {
     return false;
 }
 
-bool TListaCalendario::Borrar(const TListaPos &p) {
+bool TListaCalendario::Borrar(TListaPos &p) {
     TNodoCalendario *n = p.pos;
     TNodoCalendario *m = primero;
     TNodoCalendario *q = NULL;
@@ -211,7 +211,7 @@ TCalendario TListaCalendario::Obtener(const TListaPos &p) {
     return p.pos->c;
 }
 
-bool TListaCalendario::Buscar(const TCalendario &c) {
+bool TListaCalendario::Buscar(TCalendario &c) {
     TNodoCalendario *n = primero;
     while (n != NULL && n->c != c) {
         n = n->siguiente;
@@ -246,30 +246,11 @@ TListaPos TListaCalendario::Ultima() {
 }
 
 TListaCalendario TListaCalendario::SumarSubl(int i, int j, TListaCalendario &l, int k, int m) {
-    TListaCalendario aux;
-    TNodoCalendario *n = primero;
-    int c = 1;
-    while (n != NULL && c < i) {
-        n = n->siguiente;
-        c++;
-    }
-    while (n != NULL && c <= j) {
-        aux.Insertar(n->c);
-        n = n->siguiente;
-        c++;
-    }
-    TNodoCalendario *m = l.primero;
-    c = 1;
-    while (m != NULL && c < k) {
-        m = m->siguiente;
-        c++;
-    }
-    while (m != NULL && c <= m) {
-        aux.Insertar(m->c);
-        m = m->siguiente;
-        c++;
-    }
-    return aux;
+    TListaCalendario l1, l2, l3;
+    l1 = ExtraerRango(i, j);
+    l2 = l.ExtraerRango(k, m);
+    l3 = l1 + l2;
+    return l3;
 }
 
 TListaCalendario TListaCalendario::ExtraerRango(int i, int j) {
