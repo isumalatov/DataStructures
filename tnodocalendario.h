@@ -6,12 +6,11 @@
 
 using namespace std;
 
-class TNodoCalendario {
-    friend ostream & operator<<(ostream &, TNodoCalendario &);
-    
+class TNodoCalendario {    
     private:
         TCalendario c;
         TNodoCalendario *siguiente;
+        void copia(const TNodoCalendario &);
     
     public:
         TNodoCalendario();
